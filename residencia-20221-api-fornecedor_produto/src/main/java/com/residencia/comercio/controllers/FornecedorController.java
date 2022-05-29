@@ -98,6 +98,12 @@ public class FornecedorController {
 		Fornecedor novoFornecedor = fornecedorService.updateFornecedor(fornecedor);
 		return new ResponseEntity<>(novoFornecedor, HttpStatus.OK);
 	}
+	
+	/*@PutMapping("/cep/{cep}")
+	public ResponseEntity<Fornecedor> updateFornecedorCep(@PathVariable String cep, @RequestBody Fornecedor fornecedor) {
+		Fornecedor novoFornecedor = fornecedorService.updateFornecedorCep(cep);
+		return new ResponseEntity<>(novoFornecedor, HttpStatus.OK);
+	}*/
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<String> deleteFornecedor(@PathVariable Integer id) {

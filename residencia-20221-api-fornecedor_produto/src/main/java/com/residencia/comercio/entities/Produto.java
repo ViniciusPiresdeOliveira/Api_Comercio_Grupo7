@@ -27,6 +27,7 @@ public class Produto {
 	@Column(name = "sku")
 	private String sku;
 
+	@NotBlank(message = "O Nome do produto não pode estar vazio")
 	@Column(name = "nome_produto")
 	private String nomeProduto;
 

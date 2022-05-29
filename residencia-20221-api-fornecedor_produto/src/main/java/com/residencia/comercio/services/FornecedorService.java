@@ -6,11 +6,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-
 import com.residencia.comercio.dtos.CadastroEmpresaCepDTO;
 import com.residencia.comercio.dtos.CadastroEmpresaReceitaDTO;
 import com.residencia.comercio.dtos.FornecedorDTO;
@@ -51,11 +49,16 @@ public class FornecedorService {
 		Fornecedor novoFornecedor = fornecedorRepository.save(fornecedor);
 		return converterEntidadeParaDto(novoFornecedor);
 	}
-	
+
 	public Fornecedor saveFornecedorCnpj(String cnpj) throws ParseException {
-        Fornecedor novoFornecedor = fornecedorCnpj(cnpj);
-        return fornecedorRepository.save(novoFornecedor);
-    }
+		Fornecedor novoFornecedor = fornecedorCnpj(cnpj);
+		return fornecedorRepository.save(novoFornecedor);
+	}
+
+	/*public Fornecedor updateFornecedorCep(String cep) {
+		Fornecedor novoFornecedor = fornecedorCep(cep);
+		return fornecedorRepository.save(novoFornecedor);	
+	}*/
 
 	public Fornecedor updateFornecedor(Fornecedor fornecedor) {
 		return fornecedorRepository.save(fornecedor);
@@ -159,5 +162,18 @@ public class FornecedorService {
 		fornecedorCnpj.setUf(cert.getUf());
 
 		return fornecedorCnpj;
+	}
+
+	public Fornecedor fornecedorCep(String cep) {
+		CadastroEmpresaCepDTO cert = consultarDadosPorCep(cep);
+		Fornecedor fornecedor = new Fornecedor();
+
+		fornecedor.setCep(cert.getCep());
+		fornecedor.setBairro(cert.getBairro());
+		fornecedor.setComplemento(cert.getComplemento());
+		fornecedor.setLogradouro(cert.getLogradouro());
+		fornecedor.setUf(cert.getUf());
+
+		return fornecedor;
 	}
 }

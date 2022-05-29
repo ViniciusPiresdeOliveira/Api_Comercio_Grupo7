@@ -10,9 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.Digits;
-import javax.validation.constraints.NotEmpty;
-
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.br.CNPJ;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -20,52 +21,69 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Table(name = "fornecedor")
 @JsonIdentityInfo(scope = Fornecedor.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "idFornecedor")
 public class Fornecedor {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_fornecedor")
 	private Integer idFornecedor;
 
+	@CNPJ
+	@NotBlank(message = "O CNPJ do produto não pode estar vazio")
 	@Column(name = "cnpj")
-	// @NotEmpty(message = "O número do CNPJ não pode ficar em branco.")
-	// @Digits(message="O CNPJ deve conter 14 números.", fraction = 0, integer = 14)
+	//@NotEmpty(message = "O número do CNPJ não pode ficar em branco.")
+	//@Digits(message="O CNPJ deve conter 14 números.", fraction = 0, integer = 14)
 	private String cnpj;
 
+	@NotBlank(message = "O Tipo do produto não pode estar vazio")
 	@Column(name = "tipo")
 	private String tipo;
 
+	@NotBlank(message = "A Razão Social do produto não pode estar vazio")
 	@Column(name = "razao_social")
 	private String razaoSocial;
 
+	@NotBlank(message = "O UF do produto não pode estar vazio")
 	@Column(name = "uf")
 	private String uf;
 
+	@Size(min = 11, max = 15, message = "O telefone deve ter entre 11 e 15 caracteres")
+	@NotBlank(message = "O Telefone do produto não pode estar vazio")
 	@Column(name = "telefone")
 	private String telefone;
 
+	@Email
+	@NotBlank(message = "O Email do produto não pode estar vazio")
 	@Column(name = "email")
 	private String email;
 
+	@NotBlank(message = "O Nome Fantasia do produto não pode estar vazio")
 	@Column(name = "nome_fantasia")
 	private String nomeFantasia;
 
+	@NotBlank(message = "O Status Situação do produto não pode estar vazio")
 	@Column(name = "status_situacao")
 	private String statusSituacao;
 
+	@NotBlank(message = "O Bairro do produto não pode estar vazio")
 	@Column(name = "bairro")
 	private String bairro;
 
+	@NotBlank(message = "O Logradouro do produto não pode estar vazio")
 	@Column(name = "logradouro")
 	private String logradouro;
 
 	@Column(name = "numero")
 	private Integer numero;
 
+	@NotBlank(message = "O Complemento do produto não pode estar vazio")
 	@Column(name = "complemento")
 	private String complemento;
 
+	@NotBlank(message = "O CEP do produto não pode estar vazio")
 	@Column(name = "cep")
 	private String cep;
 
+	@NotBlank(message = "O Município do produto não pode estar vazio")
 	@Column(name = "municipio")
 	private String municipio;
 
