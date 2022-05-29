@@ -160,6 +160,7 @@ public class FornecedorService {
 		Date dataFormatada = formato.parse(cert.getAbertura());
 		fornecedorCnpj.setDataAbertura(dataFormatada);
 		fornecedorCnpj.setUf(cert.getUf());
+		fornecedorCnpj.setNumero(cert.getNumero());
 
 		return fornecedorCnpj;
 	}

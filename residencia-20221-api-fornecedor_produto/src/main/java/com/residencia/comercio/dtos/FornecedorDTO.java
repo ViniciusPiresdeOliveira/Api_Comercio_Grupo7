@@ -2,23 +2,61 @@ package com.residencia.comercio.dtos;
 
 import java.util.Date;
 
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.br.CNPJ;
+
 public class FornecedorDTO {
 	private Integer idFornecedor;
+	
+	@CNPJ
+	@NotBlank(message = "O CNPJ do produto não pode estar vazio")
 	private String cnpj;
+	
+	@NotBlank(message = "O Tipo do produto não pode estar vazio")
 	private String tipo;
+	
+	@NotBlank(message = "A Razão Social do produto não pode estar vazio")
 	private String razaoSocial;
+	
+	@NotBlank(message = "O UF do produto não pode estar vazio")
 	private String uf;
+	
+	@Size(min = 11, max = 15, message = "O telefone deve ter entre 11 e 15 caracteres")
+	@NotBlank(message = "O Telefone do produto não pode estar vazio")
 	private String telefone;
+	
+	@Email
+	@NotBlank(message = "O Email do produto não pode estar vazio")
 	private String email;
+
+	@NotBlank(message = "O Nome Fantasia do produto não pode estar vazio")
 	private String nomeFantasia;
+	
+	@NotBlank(message = "O Status Situação do produto não pode estar vazio")
 	private String statusSituacao;
+	
+	@NotBlank(message = "O Bairro do produto não pode estar vazio")
 	private String bairro;
+	
+	@NotBlank(message = "O Logradouro do produto não pode estar vazio")
 	private String logradouro;
-	private Integer numero;
+	
+	private String numero;
+	
+	@NotBlank(message = "O Complemento do produto não pode estar vazio")
 	private String complemento;
+	
+	@NotBlank(message = "O CEP do produto não pode estar vazio")
 	private String cep;
+	
+	@NotBlank(message = "O Município do produto não pode estar vazio")
 	private String municipio;
+	
 	private Date dataAbertura;
+	
 	//private List<ProdutoDTO> produtoDTOList;
 
 	public Integer getIdFornecedor() {
@@ -109,11 +147,11 @@ public class FornecedorDTO {
 		this.logradouro = logradouro;
 	}
 
-	public Integer getNumero() {
+	public String getNumero() {
 		return numero;
 	}
 
-	public void setNumero(Integer numero) {
+	public void setNumero(String numero) {
 		this.numero = numero;
 	}
 

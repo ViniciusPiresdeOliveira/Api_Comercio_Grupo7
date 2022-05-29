@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -69,20 +70,20 @@ public class FornecedorController {
 	}
 	
 	@PostMapping
-	public ResponseEntity<Fornecedor> saveFornecedor(@RequestParam String cnpj) {
+	public ResponseEntity<Fornecedor> saveFornecedor(@Validated @RequestParam String cnpj) {
 		Fornecedor fornecedor = new Fornecedor();
 		Fornecedor novoFornecedor = fornecedorService.saveFornecedor(fornecedor);
 		return new ResponseEntity<>(novoFornecedor, HttpStatus.CREATED);
 	}
 
 	@PostMapping("/completo")
-	public ResponseEntity<Fornecedor> saveFornecedorCompleto(@RequestBody Fornecedor fornecedor) {
+	public ResponseEntity<Fornecedor> saveFornecedorCompleto(@Validated @RequestBody Fornecedor fornecedor) {
 		Fornecedor novoFornecedor = fornecedorService.saveFornecedor(fornecedor);
 		return new ResponseEntity<>(novoFornecedor, HttpStatus.CREATED);
 	}
 	
 	@PostMapping("/dto")
-	public ResponseEntity<FornecedorDTO> saveFornecedorDTO(@RequestBody FornecedorDTO fornecedorDTO) {
+	public ResponseEntity<FornecedorDTO> saveFornecedorDTO(@Validated @RequestBody FornecedorDTO fornecedorDTO) {
 		FornecedorDTO novoFornecedorDTO = fornecedorService.saveFornecedorDTO(fornecedorDTO);
 		return new ResponseEntity<>(novoFornecedorDTO, HttpStatus.CREATED);
 	}
@@ -94,7 +95,7 @@ public class FornecedorController {
     }
 	
 	@PutMapping
-	public ResponseEntity<Fornecedor> updateFornecedor(@RequestBody Fornecedor fornecedor) {
+	public ResponseEntity<Fornecedor> updateFornecedor(@Validated @RequestBody Fornecedor fornecedor) {
 		Fornecedor novoFornecedor = fornecedorService.updateFornecedor(fornecedor);
 		return new ResponseEntity<>(novoFornecedor, HttpStatus.OK);
 	}
