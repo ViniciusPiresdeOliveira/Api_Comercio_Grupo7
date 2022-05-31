@@ -10,7 +10,6 @@ import io.swagger.v3.oas.models.headers.Header;
 import io.swagger.v3.oas.models.info.Info;
 import io.swagger.v3.oas.models.media.StringSchema;
 import io.swagger.v3.oas.models.parameters.Parameter;
-import io.swagger.v3.oas.models.security.SecurityScheme;
 
 @Configuration
 public class SwaggerConfiguration {
@@ -19,8 +18,6 @@ public class SwaggerConfiguration {
 	public OpenAPI customOpenAPI(@Value("${springdoc.version}") String appVersion) {
 		return new OpenAPI()
 				.components(new Components()
-						.addSecuritySchemes("basicScheme",
-								new SecurityScheme().type(SecurityScheme.Type.HTTP).scheme("basic"))
 						.addParameters("myHeader1",
 								new Parameter().in("header").schema(new StringSchema()).name("myHeader1"))
 						.addHeaders("myHeader2",
