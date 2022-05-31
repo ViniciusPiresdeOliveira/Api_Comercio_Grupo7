@@ -1,6 +1,5 @@
 package com.residencia.comercio.entities;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -10,7 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotBlank;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
@@ -19,13 +18,14 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 @Table(name = "categoria")
 @JsonIdentityInfo(scope = Categoria.class, generator = ObjectIdGenerators.PropertyGenerator.class, property = "idCategoria")
 public class Categoria {
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_categoria")
 	private Integer idCategoria;
 
 	@Column(name = "nome_categoria")
-	@NotEmpty(message = "O nome da categoria não pode ficar em branco.")
+	@NotBlank(message = "O nome da categoria não pode ficar em branco.")
 	private String nomeCategoria;
 
 	@Column(name = "imagem")

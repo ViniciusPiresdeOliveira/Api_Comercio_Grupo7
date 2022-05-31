@@ -26,7 +26,6 @@ import com.residencia.comercio.services.ProdutoService;
 
 @RestController
 @RequestMapping("/produto")
-@Validated
 public class ProdutoController {
 
 	@Autowired
@@ -40,7 +39,7 @@ public class ProdutoController {
 		}
 		return new ResponseEntity<>(produtoService.findAll(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("/id")
 	public ResponseEntity<Produto> findByIdRequest(@RequestParam @NotBlank Integer id) {
 		Produto produto = produtoService.findById(id);
@@ -62,40 +61,40 @@ public class ProdutoController {
 	}
 
 	@PostMapping
-    public ResponseEntity<Produto> save(@Valid @RequestBody Produto produto) {
-        Produto novoProduto = produtoService.save(produto);
-        return new ResponseEntity<>(novoProduto, HttpStatus.CREATED);
-    }
+	public ResponseEntity<Produto> save(@Validated @RequestBody Produto produto) {
+		Produto novoProduto = produtoService.save(produto);
+		return new ResponseEntity<>(novoProduto, HttpStatus.CREATED);
+	}
 
-    @PostMapping("/dto")
-    public ResponseEntity<ProdutoDTO> saveDTO(@RequestBody ProdutoDTO produtoDTO) {
-        ProdutoDTO novoProdutoDTO = produtoService.saveProdutoDTO(produtoDTO);
-        return new ResponseEntity<>(novoProdutoDTO, HttpStatus.CREATED);
-    }
+	@PostMapping("/dto")
+	public ResponseEntity<ProdutoDTO> saveDTO(@Validated @RequestBody ProdutoDTO produtoDTO) {
+		ProdutoDTO novoProdutoDTO = produtoService.saveProdutoDTO(produtoDTO);
+		return new ResponseEntity<>(novoProdutoDTO, HttpStatus.CREATED);
+	}
 
 	@PutMapping
-	public ResponseEntity<Produto> update(@RequestBody Produto produto) {
+	public ResponseEntity<Produto> update(@Validated @RequestBody Produto produto) {
 		Produto produtoAtualizado = produtoService.update(produto);
 		return new ResponseEntity<>(produtoAtualizado, HttpStatus.OK);
 	}
 
 	@PutMapping("/{id}")
-	public ResponseEntity<Produto> update(@PathVariable Integer id, @RequestBody Produto produto){
+	public ResponseEntity<Produto> update(@Validated @PathVariable Integer id, @RequestBody Produto produto) {
 		Produto produtoAtualizado = produtoService.updateComId(produto, id);
-		if(null == produtoAtualizado)
+		if (null == produtoAtualizado)
 			return new ResponseEntity<>(produtoAtualizado, HttpStatus.BAD_REQUEST);
 		else
 			return new ResponseEntity<>(produtoAtualizado, HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping
-	public ResponseEntity<String> delete(Produto produto){
+	public ResponseEntity<String> delete(Produto produto) {
 		produtoService.delete(produto);
 		return new ResponseEntity<>("", HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("/{id}")
-	public ResponseEntity<String> delete(Integer id){
+	public ResponseEntity<String> delete(Integer id) {
 		produtoService.deletePorId(id);
 		return new ResponseEntity<>("", HttpStatus.OK);
 	}
