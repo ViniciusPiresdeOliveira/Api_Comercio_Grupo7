@@ -16,6 +16,10 @@ import com.residencia.comercio.repositories.CategoriaRepository;
 public class CategoriaService {
 	@Autowired
 	CategoriaRepository categoriaRepository;
+	@Autowired
+	ArquivoService arquivoService;
+	@Autowired
+	MailService emailService;
 
 	public List<Categoria> findAllCategoria() {
 		return categoriaRepository.findAll();
@@ -73,8 +77,7 @@ public class CategoriaService {
 		return categoriaDTO;
 	}
 
-	public Categoria saveCategoriaComFoto(String categoriaString, MultipartFile file) {
-
+	public Categoria saveCategoriaComFoto(String categoriaString, MultipartFile file) throws Exception {
 		Categoria categoriaConvertida = new Categoria();
 		try {
 			ObjectMapper objMapper = new ObjectMapper();
@@ -83,9 +86,13 @@ public class CategoriaService {
 			System.out.println("Ocorreu um erro na gravação");
 		}
 		Categoria categoriaBD = categoriaRepository.save(categoriaConvertida);
-		categoriaBD.setNomeImagem(categoriaBD.getIdCategoria() + "_" + file.getOriginalFilename());
-		Categoria categoriAtualizada = categoriaRepository.save(categoriaBD);
-		return null;
-	}
+		categoriaBD.setNomeImagem(categoriaBD.getIdCategoria() + "" + file.getOriginalFilename());
+		Categoria categoriaAtualizada = categoriaRepository.save(categoriaBD);
 
+		arquivoService.criarArquivo(categoriaBD.getIdCategoria() + "" + file.getOriginalFilename(), file);
+		String corpoEmail = "Foi cadastrada uma nova categoria" + categoriaAtualizada.toString();
+		emailService.enviarEmailTexto("teste@teste.com", "Cadastro de Categoria", corpoEmail);
+
+		return categoriaAtualizada;
+	}
 }

@@ -1,12 +1,7 @@
 package com.residencia.comercio.dtos;
 
-import javax.validation.constraints.NotBlank;
-
 public class CategoriaDTO {
-	
 	private Integer idCategoria;
-	
-	@NotBlank(message = "O nome da categoria não pode ficar em branco.")
 	private String nomeCategoria;
 
 	public Integer getIdCategoria() {

@@ -2,8 +2,13 @@ package com.residencia.comercio.services;
 
 import java.util.List;
 
+import javax.validation.constraints.NotBlank;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.residencia.comercio.dtos.CategoriaDTO;
 import com.residencia.comercio.dtos.FornecedorDTO;
@@ -69,10 +74,6 @@ public class ProdutoService {
 			produtoAtualizado = produtoRepository.save(produtoBD);
 		}
 		return produtoAtualizado;
-	}
-
-	public void delete(Produto produto) {
-		produtoRepository.delete(produto);
 	}
 
 	public void deletePorId(Integer id) {
