@@ -23,6 +23,7 @@ public class CadastroEmpresaReceitaDTO {
     private String bairro;
     private String municipio;
     private String uf;
+    
 	public String getSituacao() {
 		return situacao;
 	}
