@@ -1,4 +1,4 @@
-package com.residencia.comercio.configuration;
+package com.residencia.comercio.configurations;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
